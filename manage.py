@@ -20,9 +20,10 @@ def main():
 def run_backend():
     print('Launching backend')
     try:
+        source_virtualenv('./venv')
         flask_env = os.environ.copy()
         flask_env['FLASK_APP'] = 'backend/app.py'
-        subprocess.Popen(['./venv/bin/python', '-m', 'flask', 'run'], env=flask_env).communicate()
+        subprocess.Popen(['python', '-m', 'flask', 'run'], env=flask_env).communicate()
     except KeyboardInterrupt:
         exit(0)
 
@@ -58,17 +59,21 @@ def create_and_source_virtual_environment(venv_dir):
     print("Creating virtual environment")
     os.mkdir(venv_dir)
     virtualenv.create_environment(venv_dir, site_packages=False)
-
-    print("Sourcing virtual environment")
-    source_script = os.path.join(venv_dir, "bin", "activate_this.py")
-
-    with open(source_script) as f:
-        exec(f.read(), {'__file__': source_script})
+    source_virtualenv(venv_dir)
+    
         
 
 def install_python_dependencies(venv_dir):
     print("Installing python dependencies into virtual environment")
     subprocess.call(['pip', 'install', '-r', 'backend/requirements.txt'])
+
+
+def source_virtualenv(venv_dir):
+    print("Sourcing virtual environment")
+    source_script = os.path.join(venv_dir, "bin", "activate_this.py")
+
+    with open(source_script) as f:
+        exec(f.read(), {'__file__': source_script})
 
 
 if __name__ == '__main__':
