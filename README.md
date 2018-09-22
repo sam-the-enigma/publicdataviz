@@ -101,8 +101,8 @@ If you get `Smoke Test PASS`, the backend server is properly configured. For oth
 
 ## Further Reading
 
-[Enigma SDK documentation](https://docs.enigma.com/public/public_v20_sdk_about.html)
-[Flask documentation](https://flask.readthedocs.io/en/rtd/)
-[Spark documentation](http://spark.apache.org/)
-[ReactJS documentation](https://reactjs.org/)
-[ReactD3 Documentation](http://www.reactd3.org/)
+* [Enigma SDK documentation](https://docs.enigma.com/public/public_v20_sdk_about.html)
+* [Flask documentation](https://flask.readthedocs.io/en/rtd/)
+* [Spark documentation](http://spark.apache.org/)
+* [ReactJS documentation](https://reactjs.org/)
+* [ReactD3 Documentation](http://www.reactd3.org/)
