@@ -82,7 +82,7 @@ $ python manage.py run-frontend
 
 Windows:
 ```
-$ py manage.pu run-frontend
+$ py manage.py run-frontend
     > Launching frontend
     > ...
 ```
