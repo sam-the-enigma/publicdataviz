@@ -3,6 +3,8 @@ import os
 import subprocess
 import virtualenv
 
+pyname = 'py' if os.name == 'nt' else 'python'
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('mode')
@@ -20,10 +22,10 @@ def main():
 def run_backend():
     print('Launching backend')
     try:
-        source_virtualenv('./venv')
+        source_virtualenv(f'.{os.sep}venv')
         flask_env = os.environ.copy()
         flask_env['FLASK_APP'] = 'backend/app.py'
-        subprocess.Popen(['python', '-m', 'flask', 'run'], env=flask_env).communicate()
+        subprocess.Popen([pyname, '-m', 'flask', 'run'], env=flask_env).communicate()
     except KeyboardInterrupt:
         exit(0)
 
@@ -31,7 +33,7 @@ def run_backend():
 def run_frontend():
     print('Launching frontend')
     try:
-        subprocess.Popen(['npm', '--prefix', './frontend', 'start']).communicate()
+        subprocess.Popen(['npm', '--prefix', f'frontend/', 'start']).communicate()
     except KeyboardInterrupt:
         exit(0)
 
@@ -45,14 +47,17 @@ def install():
 
 def install_backend():
     print("Installing backend")
-    venv_dir = './venv'
+    venv_dir = f'.{os.sep}venv'
     create_and_source_virtual_environment(venv_dir)
     install_python_dependencies(venv_dir)
     print("Backend installed")
 
 def install_frontend():
     print("Installing frontend")
-    subprocess.call(['npm', '--prefix', './frontend', 'install'])
+    if pyname == 'nt':
+        subprocess.call(['npm', 'install', './frontend'])
+    else:
+        subprocess.call(['npm', '--prefix', f'frontend/', 'install'])
 
 
 def create_and_source_virtual_environment(venv_dir):
@@ -65,12 +70,15 @@ def create_and_source_virtual_environment(venv_dir):
 
 def install_python_dependencies(venv_dir):
     print("Installing python dependencies into virtual environment")
-    subprocess.call(['pip', 'install', '-r', 'backend/requirements.txt'])
+    if pyname == 'python':
+        subprocess.call(['pip', 'install', '-r', 'backend/requirements.txt'])
+    else:
+        subprocess.call(['py', '-m', 'pip', 'install', '-r', 'backend/requirements.txt'])
 
 
 def source_virtualenv(venv_dir):
     print("Sourcing virtual environment")
-    source_script = os.path.join(venv_dir, "bin", "activate_this.py")
+    source_script = os.path.join(venv_dir, 'Scripts' if pyname == 'py' else 'bin', 'activate_this.py')
 
     with open(source_script) as f:
         exec(f.read(), {'__file__': source_script})
