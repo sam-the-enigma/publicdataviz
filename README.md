@@ -54,13 +54,25 @@ $ py manage.py install
 
 Once your development environment is finished installing, you can run the backend server in debug mode using the following command:
 
+
+Mac OS / Linux:
 ```
 $ python manage.py run-backend
     > Launching backend
     > ...
 ```
 
-And the frontend server:
+Windows:
+```
+$ py manage.py run-backend
+    > Launching backend
+    > ...
+```
+
+And the frontend server *(note to run both at the same time, will require (for example) two terminal tabs)*:
+
+
+Mac OS / Linux
 
 ```
 $ python manage.py run-frontend
@@ -68,9 +80,14 @@ $ python manage.py run-frontend
     > ...
 ```
 
-To exit either the backend or frontend server, use `ctrl + c`.
+Windows:
+```
+$ py manage.pu run-frontend
+    > Launching frontend
+    > ...
+```
 
-Note that the frontend server will end up depending on the backend server, so you'll need to have both running at the same time (perhaps in separate terminal windows, or using background processes)
+To exit either the backend or frontend server, use `ctrl + c`.
 
 ### Smoketest
 
@@ -81,3 +98,11 @@ http://127.0.0.1:5000/smoketest
 ```
 
 If you get `Smoke Test PASS`, the backend server is properly configured. For other messages, check the terminal to see what printed out. Make sure you have all the pre-requirements installed. Remember to raise any issues on the [github issues page](https://github.com/sam-the-enigma/publicdataviz/issues).
+
+## Further Reading
+
+[Enigma SDK documentation](https://docs.enigma.com/public/public_v20_sdk_about.html)
+[Flask documentation](https://flask.readthedocs.io/en/rtd/)
+[Spark documentation](http://spark.apache.org/)
+[ReactJS documentation](https://reactjs.org/)
+[ReactD3 Documentation](http://www.reactd3.org/)

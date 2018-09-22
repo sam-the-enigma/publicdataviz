@@ -33,7 +33,10 @@ def run_backend():
 def run_frontend():
     print('Launching frontend')
     try:
-        subprocess.Popen(['npm', '--prefix', f'frontend/', 'start']).communicate()
+        if pyname == 'py':
+            subprocess.Popen('cd ./frontend && npm start', shell=True).communicate()
+        else:
+            subprocess.Popen(['npm', '--prefix', f'frontend/', 'start']).communicate()
     except KeyboardInterrupt:
         exit(0)
 
@@ -54,10 +57,10 @@ def install_backend():
 
 def install_frontend():
     print("Installing frontend")
-    if pyname == 'nt':
-        subprocess.call(['npm', 'install', './frontend'])
+    if pyname == 'py':
+        subprocess.call('cd ./frontend && npm install', shell=True)
     else:
-        subprocess.call(['npm', '--prefix', f'frontend/', 'install'])
+        subprocess.call(['npm', '--prefix', 'frontend/', 'install'])
 
 
 def create_and_source_virtual_environment(venv_dir):
