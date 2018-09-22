@@ -23,7 +23,6 @@ Make sure you have everything installed from the Requirements section. After tha
 ### Requirements
 
 * [python3 and pip (pip typically comes with python)](https://realpython.com/installing-python/)
-* python virtualenv (`pip install virtualenv`)
 * [node.js >=6](https://nodejs.org/en/)
 * [npm >= 5.2](https://www.npmjs.com/get-npm)
 * [Java8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) 
@@ -32,20 +31,26 @@ Make sure you have everything installed from the Requirements section. After tha
 
 Setup should be very painless, as long as you have all of the pre-requirements correctly installed.
 
-*NOTE: In some installations of python, `python` points to python2, and you need to use `python3` instead. You can run `python --version` to see whether it's python2 or 3. If it's python2, use `python3 --version`. If that is python3, substitute `python` for `python3` in the below instructions*
+*NOTE: In some installations of python on Mac OS, `python` points to python2, and you need to use `python3` instead. You can run `python --version` to see whether it's python2 or 3. If it's python2, use `python3 --version`. If that is python3, substitute `python` for `python3` in the below instructions*
 
 Make sure this repository is cloned onto your machine, and with terminal open, do the following **($ are your inputs, > is expected outputs)**
 
+MAC OS / Linux:
 ```
 $ cd /into/root/of/repository
-$ ls
-    > backend/
-    > frontend/
-    > ...
+$ pip install virtualenv
 $ python manage.py install
     > Installing
     > ...
 ```
+Windows:
+```
+$ cd /into/root/of/repository
+$ py -m pip install virtualenv
+$ py manage.py install
+    > Installing
+```
+
 
 Once your development environment is finished installing, you can run the backend server in debug mode using the following command:
 
