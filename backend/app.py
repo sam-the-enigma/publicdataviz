@@ -7,6 +7,9 @@ app = Flask(__name__)
 
 sc = SparkContext(appName="smoketest")
 
+POPULATION_DATASET_ID = '17ec2829-32f7-4f69-882f-4cb83505706d'
+PRISON_DATASET_ID = '7ecea525-23f0-4c16-be92-b9e0d15b357f'
+
 @app.route('/incarcerations')
 def get_incarceration_data():
     return "Hello World!"
