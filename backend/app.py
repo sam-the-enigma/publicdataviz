@@ -1,4 +1,5 @@
 import enigma
+import os
 
 from flask import Flask
 from pyspark import SparkContext
@@ -20,10 +21,10 @@ def get_data():
 
 def get_data_from_enigma(dataset_id):
     public = enigma.Public()
+    public.set_auth(apikey=os.getenv('ENIGMA_PUBLIC_KEY', None))
     dataset = public.datasets.get(dataset_id)
-    snapshot_id = dataset.current_snapshot.id
-    snapshot = public.snapshots.get(snapshot_id, row_limit=10000)
-    return snapshot.table_rows
+    current_snapshot = dataset.current_snapshot
+    return current_snapshot.export_dataframe()
 
 
 @app.route('/smoketest')
