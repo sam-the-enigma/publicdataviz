@@ -51,7 +51,12 @@ def install():
 def install_backend():
     print("Installing backend")
     venv_dir = f'.{os.sep}venv'
-    create_and_source_virtual_environment(venv_dir)
+
+    if not os.path.exists(venv_dir):
+        create_and_source_virtual_environment(venv_dir)
+    else:
+        print('Virtual environment already created')
+
     install_python_dependencies(venv_dir)
     print("Backend installed")
 
