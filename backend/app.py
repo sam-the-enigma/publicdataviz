@@ -12,7 +12,18 @@ PRISON_DATASET_ID = '7ecea525-23f0-4c16-be92-b9e0d15b357f'
 
 @app.route('/data')
 def get_data():
-    return "Hello World!"
+    population_data = get_data_from_enigma(POPULATION_DATASET_ID)
+    prison_data = get_data_from_enigma(PRISON_DATASET_ID)
+
+    return f"Rows in Population Data: {len(population_data)}, Rows in Prison Data: {len(prison_data)}"
+
+
+def get_data_from_enigma(dataset_id):
+    public = enigma.Public()
+    dataset = public.datasets.get(dataset_id)
+    snapshot_id = dataset.current_snapshot.id
+    snapshot = public.snapshots.get(snapshot_id, row_limit=10000)
+    return snapshot.table_rows
 
 
 @app.route('/smoketest')
