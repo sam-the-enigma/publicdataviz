@@ -1,3 +1,4 @@
 Flask==1.0.2
 pyspark==2.3.1
 enigma-sdk==1.0.3
+pandas=0.23.4

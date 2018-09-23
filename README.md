@@ -22,10 +22,12 @@ Make sure you have everything installed from the Requirements section. After tha
 
 ### Requirements
 
+
+* [A free Enigma Public Account](https://public.enigma.com/signup)
 * [python3 and pip (pip typically comes with python)](https://realpython.com/installing-python/)
 * [node.js >=6](https://nodejs.org/en/)
 * [npm >= 5.2](https://www.npmjs.com/get-npm)
-* [Java8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) 
+* [Java8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 
 ### Setup Guide
 
