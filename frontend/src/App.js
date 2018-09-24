@@ -5,7 +5,11 @@ import { PieChart, Pie } from 'recharts';
 class App extends Component {
 
   componentWillMount() {
-    console.info('Hello')
+    fetch('http://127.0.0.1:5000/data')
+    .then(response => response.json())
+    .then(data => {
+      console.info(data);
+    });
   }
 
   render() {

@@ -35,7 +35,9 @@ def get_data():
     t = df.rdd.map(lambda row: (row['state'], row.asDict())).collect()
     d = { state: row for state, row in t }
 
-    return jsonify(d)
+    response = jsonify(d)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 def get_data_from_enigma(dataset_id):
