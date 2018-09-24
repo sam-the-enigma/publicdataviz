@@ -1,12 +1,14 @@
 import enigma
 import os
 
-from flask import Flask
-from pyspark import SparkContext
+from flask import Flask, jsonify
+from pyspark import SparkContext, SQLContext
 
 app = Flask(__name__)
 
 sc = SparkContext(appName="smoketest")
+sqlContext = SQLContext(sparkContext=sc)
+
 
 POPULATION_DATASET_ID = '17ec2829-32f7-4f69-882f-4cb83505706d'
 PRISON_DATASET_ID = '7ecea525-23f0-4c16-be92-b9e0d15b357f'
@@ -16,7 +18,24 @@ def get_data():
     population_data = get_data_from_enigma(POPULATION_DATASET_ID)
     prison_data = get_data_from_enigma(PRISON_DATASET_ID)
 
-    return f"Rows in Population Data: {len(population_data)}, Rows in Prison Data: {len(prison_data)}"
+    population_dataframe = sqlContext.createDataFrame(population_data).withColumnRenamed('b01003001', 'population')
+    prison_dataframe = sqlContext.createDataFrame(prison_data)
+
+
+    complete_dataframe = population_dataframe.join(prison_dataframe, on=population_dataframe.place_name == prison_dataframe.state, how='inner')
+
+    all_columns = complete_dataframe.schema.names
+    punishment_columns = ['prison', 'parole', 'jail', 'felony_probation']
+    columns_we_want = ['population', 'state'] + punishment_columns
+    
+    columns_to_drop = set(all_columns) - set(columns_we_want)
+    df = complete_dataframe.drop(*columns_to_drop)
+
+    df = df.na.fill(0)
+    t = df.rdd.map(lambda row: (row['state'], row.asDict())).collect()
+    d = { state: row for state, row in t }
+
+    return jsonify(d)
 
 
 def get_data_from_enigma(dataset_id):
