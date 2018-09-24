@@ -32,10 +32,9 @@ def get_data():
     df = complete_dataframe.drop(*columns_to_drop)
 
     df = df.na.fill(0)
-    t = df.rdd.map(lambda row: (row['state'], row.asDict())).collect()
-    d = { state: row for state, row in t }
+    t = df.rdd.map(lambda row: row.asDict()).collect()
 
-    response = jsonify(d)
+    response = jsonify(t)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
