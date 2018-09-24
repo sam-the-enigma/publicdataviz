@@ -31,6 +31,10 @@ Make sure you have everything installed from the Requirements section. After tha
 
 ### Setup Guide
 
+#### Simple Setup Guide
+
+**This is the simple set up guide that should get your dev environment running in one or two steps. If you want to take a more in-depth procedure and set up the components yourself, those instructions are further below**
+
 Setup should be very painless, as long as you have all of the pre-requirements correctly installed.
 
 *NOTE: In some installations of python on Mac OS, `python` points to python2, and you need to use `python3` instead. You can run `python --version` to see whether it's python2 or 3. If it's python2, use `python3 --version`. If that is python3, substitute `python` for `python3` in the below instructions*
@@ -90,6 +94,36 @@ $ py manage.py run-frontend
 ```
 
 To exit either the backend or frontend server, use `ctrl + c`.
+
+
+#### Advanced Setup Guide
+
+*Disclaimer: These instructions have been tested on Mac only*
+
+Installation:
+```
+$ cd /into/root/of/repository
+$ mkvirtualenv ./venv
+$ cd backend
+$ pip install -r requirements.txt
+$ cd ../frontend
+$ npm install
+```
+
+Run backend:
+```
+$ cd /into/root/of/repository
+$ source ./venv/bin/activate
+$ cd backend
+$ FLASK_APP=app.py python -m flask run
+```
+
+Run frontend (separate terminal to backend):
+```
+$ cd /into/root/of/repository
+$ cd frontend
+$ npm start
+```
 
 ### Smoketest
 
