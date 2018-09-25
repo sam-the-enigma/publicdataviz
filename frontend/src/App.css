@@ -17,5 +17,5 @@
 }
 
 .pieChart {
-  display: inline;
+  display: inline-block;
 }
