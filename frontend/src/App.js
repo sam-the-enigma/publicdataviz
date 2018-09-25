@@ -13,11 +13,14 @@ class App extends Component {
   }
 
   componentWillMount() {
-    fetch('http://127.0.0.1:5000/data')
-    .then(response => response.json())
-    .then(data => {
-      console.info(this.setState({data: data}));
-    });
+    console.info('Hello world')
+
+    // fetch('http://127.0.0.1:5000/data')
+    // .then(response => response.json())
+    // .then(data => {
+    //   console.info(data)
+    //   this.setState({data: data});
+    // });
   }
 
   render() {
@@ -29,7 +32,15 @@ class App extends Component {
           <h1 className="App-title">Public Data Viz</h1>
         </header>
         <div className="App-intro">
-          {renderPieCharts(data)}
+          <PieChart width={100} height={100} className='pieChart'>
+            <Pie
+              dataKey='value'
+              data={[{name: 'Group A', value: 400}, {name: 'Group B', value: 300}]}
+            >
+            </Pie>
+          </PieChart>
+
+          {/*renderPieCharts(data)*/}
         </div>
       </div>
     );
@@ -37,72 +48,72 @@ class App extends Component {
 }
 
 function renderPieCharts(data) {
-  data = sortByPunishmentRate(data);
-  return data.map((row, index) => renderPieChart(row, index));
+  //data = sortByPunishmentRate(data);
+  //return data.map((row, index) => renderPieChart(row, index));
 }
 
-function sortByPunishmentRate(data){
-  return data.sort((b, a) => {
-    let aSum = a['prison'] + a['parole'] + a['jail'] + a['felony_probation'];
-    let bSum = b['prison'] + b['parole'] + b['jail'] + b['felony_probation'];
+// function sortByPunishmentRate(data){
+//   return data.sort((b, a) => {
+//     let aSum = a['prison'] + a['parole'] + a['jail'] + a['felony_probation'];
+//     let bSum = b['prison'] + b['parole'] + b['jail'] + b['felony_probation'];
 
-    return (b['population'] / bSum) - (a['population'] / aSum);
-  })
-}
+//     return (b['population'] / bSum) - (a['population'] / aSum);
+//   })
+// }
 
-function renderPieChart(row, index) {
-  let stateName = row['state']
-  delete row['state']
-
-
-  let arr = [];
-
-  for (let key in row) {
-    if (row.hasOwnProperty(key)) {
-      let value = row[key];
-
-      if (key === 'population') {
-        value /= 10;
-      }
-
-      arr.push({
-        name: key,
-        value: value
-      });
-    }
-  }
-
-  let colors = {
-      'population': '#B7C75A',
-      'prison': '#2F9495',
-      'parole': '#566E8B',
-      'jail': '#6B4761',
-      'felony_probation': '#5B2D30'
-  }
-
-  return (
+// function renderPieChart(row, index) {
+//   let stateName = row['state']
+//   delete row['state']
 
 
-    <PieChart width={350} height={350} className='pieChart' key={index}>
-      <Tooltip />
-      <Pie
-        dataKey='value'
-        data={arr}
-        outerRadius='75%'
-      >
-        <Label
-          value={stateName}
-          viewBox={{x: 50, y: 500, width: 400, height: 400}}
-        />
+//   let arr = [];
 
-        {
-          arr.map((entry, index) => {
-            return (<Cell fill={colors[entry.name]} key={index}/>)
-          })
-        }
-      </Pie>
-    </PieChart>
-    );
-}
+//   for (let key in row) {
+//     if (row.hasOwnProperty(key)) {
+//       let value = row[key];
+
+//       if (key === 'population') {
+//         value /= 10;
+//       }
+
+//       arr.push({
+//         name: key,
+//         value: value
+//       });
+//     }
+//   }
+
+//   let colors = {
+//       'population': '#B7C75A',
+//       'prison': '#2F9495',
+//       'parole': '#566E8B',
+//       'jail': '#6B4761',
+//       'felony_probation': '#5B2D30'
+//   }
+
+//   return (
+
+
+//     <PieChart width={350} height={350} className='pieChart' key={index}>
+//       <Tooltip />
+//       <Pie
+//         dataKey='value'
+//         data={arr}
+//         outerRadius='75%'
+//       >
+//         <Label
+//           value={stateName}
+//           viewBox={{x: 50, y: 500, width: 400, height: 400}}
+//         />
+
+//         {
+//           arr.map((entry, index) => {
+//             return (<Cell fill={colors[entry.name]} key={index}/>)
+//           })
+//         }
+//       </Pie>
+//     </PieChart>
+//     );
+// }
 
 export default App;
