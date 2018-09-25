@@ -42,7 +42,7 @@ function renderPieCharts(data) {
 }
 
 function sortByPunishmentRate(data){
-  return data.sort((a, b) => {
+  return data.sort((b, a) => {
     let aSum = a['prison'] + a['parole'] + a['jail'] + a['felony_probation'];
     let bSum = b['prison'] + b['parole'] + b['jail'] + b['felony_probation'];
 
@@ -53,7 +53,7 @@ function sortByPunishmentRate(data){
 function renderPieChart(row, index) {
   let stateName = row['state']
   delete row['state']
-  
+
 
   let arr = [];
 
@@ -73,25 +73,25 @@ function renderPieChart(row, index) {
   }
 
   let colors = {
-      'population': '#FFA500',
-      'prison': '#FF0000',
-      'parole': '#CC3399',
-      'jail': '#000033',
-      'felony_probation': '#33FFFF'
+      'population': '#B7C75A',
+      'prison': '#2F9495',
+      'parole': '#566E8B',
+      'jail': '#6B4761',
+      'felony_probation': '#5B2D30'
   }
 
   return (
-    
 
-    <PieChart width={250} height={250} className='pieChart' key={index}>
+
+    <PieChart width={350} height={350} className='pieChart' key={index}>
       <Tooltip />
       <Pie
         dataKey='value'
         data={arr}
-        outerRadius='50%'
+        outerRadius='75%'
       >
-        <Label 
-          value={stateName} 
+        <Label
+          value={stateName}
           viewBox={{x: 50, y: 500, width: 400, height: 400}}
         />
 
