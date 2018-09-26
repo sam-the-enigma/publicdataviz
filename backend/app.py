@@ -3,6 +3,7 @@ import os
 
 from flask import Flask, jsonify
 from pyspark import SparkContext, SQLContext
+from pprint import pprint
 
 app = Flask(__name__)
 
@@ -20,12 +21,16 @@ def get_data():
     # population_data = get_data_from_enigma(POPULATION_DATASET_ID)
     # prison_data = get_data_from_enigma(PRISON_DATASET_ID)
 
-    # return f"Rows in Population Data: {len(population_data)}, Rows in Prison Data: {len(prison_data)}"
 
     # population_dataframe = sqlContext.createDataFrame(population_data).withColumnRenamed('b01003001', 'population')
     # prison_dataframe = sqlContext.createDataFrame(prison_data)
 
+    # population_dataframe.show()
+    # prison_dataframe.show()
+
     # df = population_dataframe.join(prison_dataframe, on=population_dataframe.place_name == prison_dataframe.state, how='inner')
+
+    # df.show()
 
     # all_columns = df.schema.names
     # punishment_columns = ['prison', 'parole', 'jail', 'felony_probation']
@@ -34,12 +39,20 @@ def get_data():
     # columns_to_drop = set(all_columns) - set(columns_we_want)
     # df = df.drop(*columns_to_drop)
 
+    # df.show()
+
     # df = df.na.fill(0)
+
+    # df.show()
     # rows_as_dicts = df.rdd.map(lambda row: row.asDict()).collect()
+
+    # pprint(rows_as_dicts)
 
     # response = jsonify(rows_as_dicts)
     # response.headers.add('Access-Control-Allow-Origin', '*')
     # return response
+
+    # return f"Rows in Population Data: {len(population_data)}, Rows in Prison Data: {len(prison_data)}"
 
 
 # def get_data_from_enigma(dataset_id):
