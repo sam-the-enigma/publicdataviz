@@ -12,16 +12,16 @@ class App extends Component {
     }
   }
 
-  componentWillMount() {
-    console.info('Hello world')
+  // componentWillMount() {
+  //   console.info('Hello world')
 
-    // fetch('http://127.0.0.1:5000/data')
-    // .then(response => response.json())
-    // .then(data => {
-    //   console.info(data)
-    //   this.setState({data: data});
-    // });
-  }
+  //   fetch('http://127.0.0.1:5000/data')
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     console.info(data)
+  //     this.setState({data: data});
+  //   });
+  // }
 
   render() {
     const { data } = this.state;
@@ -40,31 +40,30 @@ class App extends Component {
             </Pie>
           </PieChart>
 
-          {/*renderPieCharts(data)*/}
+          {/* renderPieCharts(data) */}
         </div>
       </div>
     );
   }
 }
 
-function renderPieCharts(data) {
-  //data = sortByPunishmentRate(data);
-  //return data.map((row, index) => renderPieChart(row, index));
-}
+// function renderPieCharts(data) {
+//   data = sortByPunishmentRate(data);
+//   return data.map((row, index) => renderPieChart(row, index));
+// }
 
 // function sortByPunishmentRate(data){
-//   return data.sort((b, a) => {
+//   return data.sort((a, b) => {
 //     let aSum = a['prison'] + a['parole'] + a['jail'] + a['felony_probation'];
 //     let bSum = b['prison'] + b['parole'] + b['jail'] + b['felony_probation'];
 
-//     return (b['population'] / bSum) - (a['population'] / aSum);
+//     return (a['population'] / aSum) - (b['population'] / bSum);
 //   })
 // }
 
 // function renderPieChart(row, index) {
 //   let stateName = row['state']
 //   delete row['state']
-
 
 //   let arr = [];
 
@@ -92,8 +91,6 @@ function renderPieCharts(data) {
 //   }
 
 //   return (
-
-
 //     <PieChart width={350} height={350} className='pieChart' key={index}>
 //       <Tooltip />
 //       <Pie
